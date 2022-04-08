@@ -13,11 +13,6 @@ Disponer de un entorno de integración continua, con los siguientes componentes:
 
 ## Preparación del entorno:
 
-##### Descarga el proyecto
-
-```
-git clone https://github.com/jorgepacheco/docker-integracion-continua
-```
 ##### Configuración de las versiones
 
 Se pueden configurar las versiones de las diferentes herramientas que componen el entorno, para ello editaremos el fichero ***.env***
