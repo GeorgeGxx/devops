@@ -1,0 +1,54 @@
+version: '2'
+
+services:
+
+  nexus:
+    image: sonatype/nexus3:${NEXUS_VERSION}
+    container_name: nexus
+    ports:
+      - "18081:8081"
+    volumes_from:
+      - nexus-data
+    networks:
+      - net-ci
+
+  nexus-data:
+    container_name: nexus-data
+    image: sonatype/nexus:oss
+    command: echo "data-only container for Nexus"
+
+  jenkins:
+    build:
+      context: ./jenkins
+      dockerfile: Dockerfile_${JENKINS_VERSION}
+      args:
+            MAVEN_VERSION: "3.0.4"
+    container_name: jenkins
+    #image: jenkins
+    links:
+      - nexus
+      - sonar
+    volumes:
+      - ./jenkins-data-${JENKINS_VERSION}/home:/var/jenkins_home
+    ports:
+      - "18080:8080"
+      - "50000:50000"
+    networks:
+      - net-ci
+
+  sonar:
+    image: sonarqube:${SONAR_VERSION}
+    container_name: sonar
+    ports:
+      - "19000:9000"
+    volumes_from:
+      - sonar-plugins
+    networks:
+      - net-ci
+
+  sonar-plugins:
+    image: autentia.no-ip.org:5002/sonar-tnt-plugins
+    command: /bin/true
+networks:
+  net-ci:
+    driver: bridge
