@@ -132,37 +132,37 @@ java -jar jenkins.war
 
 Instalar Jenkins en Docker (Dockerfile)
 
-# Download base image ubuntu 16.04
+- #Download base image ubuntu 16.04
 FROM ubuntu:16.04
 
-# Update Ubuntu Software repository
+- #Update Ubuntu Software repository
 RUN apt-get update
 
-# Install Java
+- #Install Java
 RUN apt install openjdk-8-jdk -y
 
-# Install maven
+- #Install maven
 RUN apt-get install maven -y
 
-# install wget 
+- #install wget 
 RUN apt-get install wget -y
 
-# install gnupg2
+- #install gnupg2
 RUN apt-get update && apt-get install -y gnupg2
 
-#  Descargar el paquete desde la página de Jenkins CI y agregar las llaves del repositorio a la lista de sources.
+- #Descargar el paquete desde la página de Jenkins CI y agregar las llaves del repositorio a la lista de sources.
 RUN wget -q -O - https://pkg.jenkins.io/debian/jenkins-ci.org.key | apt-key add -
 
-# Agrega Jenkins a la lista de sources:
+- #Agrega Jenkins a la lista de sources:
 RUN sh -c 'echo deb http://pkg.jenkins.io/debian-stable binary/ > /etc/apt/sources.list.d/jenkins.list'
 
-#Add support for https apt sources
+- #Add support for https apt sources
 RUN apt-get install -y apt-transport-https ca-certificates
 
-# Actualizar el índice de paquetería
+- #Actualizar el índice de paquetería
 RUN apt-get update
 
-# Instalar Jenkins: 
+- #Instalar Jenkins: 
 RUN apt-get install jenkins -y
 
 CMD /etc/init.d/jenkins start
