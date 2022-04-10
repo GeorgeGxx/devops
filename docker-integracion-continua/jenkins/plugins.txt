@@ -1,0 +1,10 @@
+greenballs 1.15
+cobertura 1.9.8
+jquery 1.11.2-0
+sonar 2.4.4
+m2release 0.14.0
+promoted-builds 2.27
+ant 1.4
+junit 1.18
+chucknorris 1.0
+structs 1.3
