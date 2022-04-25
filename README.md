@@ -130,7 +130,7 @@ sudo gpasswd -a ubuntu docker
 
 java -jar jenkins.war
 
-7380713d6c26462ab5b8c1850c031f6c
+Ex: 7380713d6c26462ab5b8c1850c031f6c
 
 -------------------------------------
 
