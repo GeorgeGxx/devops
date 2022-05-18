@@ -1,5 +1,88 @@
 # Docker, Kubernetes, Jenkins, Terraform, Confluent Labs & More
 
+## Java 11 (on Ubuntu)
+
+sudo apt-get update
+sudo apt-get install openjdk-11-jdk -y
+java -version
+
+## Node 16.X LTS
+
+Instalar node en Ubuntu 20.04
+******************************************************************
+curl -fsSL https://deb.nodesource.com/setup_16.x | sudo -E bash -
+sudo apt install -y nodejs
+node --version
+
+## Jenkins
+
+- Instalar Jenkins
+
+java -jar jenkins.war
+
+Ex: 7380713d6c26462ab5b8c1850c031f6c
+
+wget -q -O - https://pkg.jenkins.io/debian-stable/jenkins.io.key | sudo apt-key add -
+sudo apt-add-repository "deb https://pkg.jenkins.io/debian-stable binary/"
+sudo apt-get update
+sudo apt-get install jenkins -y
+
+Para solucionar el problema de certificado:
+
+sudo apt-get upgrade -Y
+
+jenkins status (en CLI de Ubuntu WSL2 para arrancar Jenkins Web)
+
+5796fbe3dbd74934bbdc2a08369d3fde
+
+Instalar Jenkins en Docker checkar Dockerfile
+
+docker build -t "pruebas9:dockerfile" .
+
+docker images
+
+*Optional:*
+docker run -dti --name pruebacontainer -p 8080:8080 <<imageID>>
+docker run -dti --name pruebacontainer -p 8080:8080 af5e7f2c2088
+docker run -dti --name pruebacontainer af5e7f2c2088
+
+docker ps
+
+docker exec -i -t pruebacontainer /bin/bash
+
+dstat
+
+--------------------------------------
+
+## Docker
+
+Instalar Docker CE
+********************************************************************************************
+sudo apt-get update
+sudo apt-get install curl apt-transport-https ca-certificates software-properties-common -y
+
+curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo apt-key add -
+
+sudo add-apt-repository "deb [arch=amd64] https://download.docker.com/linux/ubuntu $(lsb_release -cs) stable"
+
+sudo apt-get update
+sudo apt install docker-ce -y
+sudo usermod -aG docker $(whoami)
+
+docker search nginx
+
+docker create --name container1 nginx
+
+docker run // descarga, crea e inicializa
+
+docker run -v /var/run/docker.sock:/var/run/docker.sock -p 8080:8080 -p 50000:50000 jenkins/jenkins:lts
+
+docker run -d --name sonarqube -p 9000:9000 sonarqube
+
+Login inicial on Container
+User Sonarqube: admin
+Password Sonarqube: admin
+
 ## Comandos Docker
 
 docker --version
@@ -7,8 +90,6 @@ docker --version
 docker info
 
 docker -v
-
--------------------------------
 
 - Enumerar imagenes
 
@@ -124,50 +205,5 @@ sudo gpasswd -a ubuntu docker
 
 ---------------------------------
 
-## Jenkins
+## Kubernetes (K8S)
 
-- Instalar Jenkins
-
-java -jar jenkins.war
-
-Ex: 7380713d6c26462ab5b8c1850c031f6c
-
--------------------------------------
-
-Instalar Jenkins en Docker (Dockerfile)
-
-- #Download base image ubuntu 16.04
-FROM ubuntu:16.04
-
-- #Update Ubuntu Software repository
-RUN apt-get update
-
-- #Install Java
-RUN apt install openjdk-8-jdk -y
-
-- #Install maven
-RUN apt-get install maven -y
-
-- #install wget 
-RUN apt-get install wget -y
-
-- #install gnupg2
-RUN apt-get update && apt-get install -y gnupg2
-
-- #Descargar el paquete desde la página de Jenkins CI y agregar las llaves del repositorio a la lista de sources.
-RUN wget -q -O - https://pkg.jenkins.io/debian/jenkins-ci.org.key | apt-key add -
-
-- #Agrega Jenkins a la lista de sources:
-RUN sh -c 'echo deb http://pkg.jenkins.io/debian-stable binary/ > /etc/apt/sources.list.d/jenkins.list'
-
-- #Add support for https apt sources
-RUN apt-get install -y apt-transport-https ca-certificates
-
-- #Actualizar el índice de paquetería
-RUN apt-get update
-
-- #Instalar Jenkins: 
-RUN apt-get install jenkins -y
-
-CMD /etc/init.d/jenkins start
-EXPOSE 18081:8081
