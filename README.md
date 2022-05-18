@@ -9,7 +9,7 @@ java -version
 ## Node 16.X LTS
 
 Instalar node en Ubuntu 20.04
-******************************************************************
+
 curl -fsSL https://deb.nodesource.com/setup_16.x | sudo -E bash -
 sudo apt install -y nodejs
 node --version
