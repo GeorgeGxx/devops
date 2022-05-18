@@ -1,0 +1,208 @@
+## Java 11 (on Ubuntu)
+
+sudo apt-get update
+sudo apt-get install openjdk-11-jdk -y
+java -version
+
+## Node 16.X LTS
+
+Instalar node en Ubuntu 20.04
+
+curl -fsSL https://deb.nodesource.com/setup_16.x | sudo -E bash -
+sudo apt install -y nodejs
+node --version
+
+## Jenkins
+
+- Instalar Jenkins
+
+java -jar jenkins.war
+
+Ex: 7380713d6c26462ab5b8c1850c031f6c
+
+wget -q -O - https://pkg.jenkins.io/debian-stable/jenkins.io.key | sudo apt-key add -
+sudo apt-add-repository "deb https://pkg.jenkins.io/debian-stable binary/"
+sudo apt-get update
+sudo apt-get install jenkins -y
+
+Para solucionar el problema de certificado:
+
+sudo apt-get upgrade -Y
+
+jenkins status (en CLI de Ubuntu WSL2 para arrancar Jenkins Web)
+
+5796fbe3dbd74934bbdc2a08369d3fde
+
+Instalar Jenkins en Docker checkar Dockerfile
+
+docker build -t "pruebas9:dockerfile" .
+
+docker images
+
+*Optional:*
+docker run -dti --name pruebacontainer -p 8080:8080 <<imageID>>
+docker run -dti --name pruebacontainer -p 8080:8080 af5e7f2c2088
+docker run -dti --name pruebacontainer af5e7f2c2088
+
+docker ps
+
+docker exec -i -t pruebacontainer /bin/bash
+
+dstat
+
+--------------------------------------
+
+## Docker
+
+Instalar Docker CE
+
+sudo apt-get update
+sudo apt-get install curl apt-transport-https ca-certificates software-properties-common -y
+
+curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo apt-key add -
+
+sudo add-apt-repository "deb [arch=amd64] https://download.docker.com/linux/ubuntu $(lsb_release -cs) stable"
+
+sudo apt-get update
+sudo apt install docker-ce -y
+sudo usermod -aG docker $(whoami)
+
+docker search nginx
+
+docker create --name container1 nginx
+
+docker run // descarga, crea e inicializa
+
+docker run -v /var/run/docker.sock:/var/run/docker.sock -p 8080:8080 -p 50000:50000 jenkins/jenkins:lts
+
+docker run -d --name sonarqube -p 9000:9000 sonarqube
+
+Login inicial on Container
+User Sonarqube: admin
+Password Sonarqube: admin
+
+## Comandos Docker
+
+docker --version
+
+docker info
+
+docker -v
+
+- Enumerar imagenes
+
+docker images
+
+docker images -a
+
+- Enumerar contenedores
+
+docker ps
+
+docker ps -a
+
+docker ps -l
+
+- Crear una imagen por Dockerfile
+
+docker build -t "nombre_imagen"
+
+docker build -t spring-boot-docker:0.0.2 .
+
+docker build -t imagen-devpredator-animes .
+
+docker build -t "jenkins:dockerfile" .
+
+ls -la
+
+- Crea un contenedor en imagen
+
+docker run -p 8090:9000 nombre_imagen
+
+- Ejecuta un contenedor
+
+docker run "nombre_imagen"
+
+docker run -it ubuntu //Ejecutar container docker
+
+docker run -it openjdk:11 bash
+
+docker run --name spring-boot-docker -p 80:80 --detach spring-boot-docker:0.0.2
+
+docker run -i -t almalinux
+
+docker run -u root -i -t -p 18081:8081 -d --name jenkins-container <<imageId>> /bin/bash
+docker run -u root -i -t -p 18081:8081 -d --name jenkins-container b6f507652425 /bin/bash
+
+- Detener contenedor
+
+docker stop spring-boot-docker
+
+docker stop jenkins-container jenkins-container
+
+- Iniciar contenedor detenido
+
+docker start 1c08a7a0d0e4 //CONTAINER ID 1c08a7a0d0e4
+
+docker start <<containerId>>
+docker exec -it <<containerId>> /bin/bash
+
+- Eliminar imagenes
+
+docker rmi Image Image
+
+- Eliminar contenedores
+
+docker rm jenkins-container jenkins-container
+
+docker rm youthful_curie //NAMES youthful_curie
+
+- Confirmar cambios aplicados a una imagen de Docker en un contenedor
+
+docker commit -m "What you did to the image" -a "Author Name" container_id repository/new_image_name
+
+docker commit -m "added Node.js" -a "sammy" d9b100f2f636 sammy/ubuntu-nodejs
+
+docker images
+
+- Descargar imagenes
+
+docker pull almalinux
+
+- Introducir imágenes de Docker en un repositorio de Docker / DockerHub
+
+docker login -u docker-registry-username
+
+docker tag sammy/ubuntu-nodejs docker-registry-username/ubuntu-nodejs
+
+docker push docker-registry-username/docker-image-name
+
+docker push sammy/ubuntu-nodejs
+
+-------------------------------
+
+- Instalaciones complementarias Windows
+
+https://docs.microsoft.com/es-es/windows/wsl/install-win10#step-4---download-the-linux-kernel-update-package
+
+https://docs.microsoft.com/es-es/windows/wsl/user-support
+
+- Instalar Docker en Ubuntu
+
+https://www.digitalocean.com/community/tutorials/how-to-install-and-use-docker-on-ubuntu-20-04-es
+
+--------------------------------
+
+- Comandos Ubuntu Docker
+
+sudo apt update && sudo apt upgrade
+
+cat /etc/group
+
+sudo gpasswd -a ubuntu docker
+
+---------------------------------
+
+## Kubernetes (K8S)
+
+To be continue ...
