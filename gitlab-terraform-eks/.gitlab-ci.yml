@@ -1,0 +1,16 @@
+include:
+  - template: Terraform.gitlab-ci.yml
+
+stages:
+  - validate
+  - test
+  - build
+  - deploy
+  - cleanup
+
+destroy:
+  extends: .terraform:destroy
+  needs: []
+
+variables:
+  TF_STATE_NAME: default
