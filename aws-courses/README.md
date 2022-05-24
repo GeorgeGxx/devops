@@ -1,1 +1,0 @@
-# Curso AWS Developer
