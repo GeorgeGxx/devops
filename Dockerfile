@@ -47,6 +47,7 @@ RUN apt-get update -y
 #Instalar Jenkins: 
 #RUN apt-get install jenkins -y
 
-CMD systemctl enable jenkins
+CMD jenkins status
+#CMD systemctl enable jenkins
 #CMD /etc/init.d/jenkins start
-#EXPOSE 18081:8081
+#EXPOSE 8080:8080

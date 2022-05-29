@@ -39,10 +39,11 @@ docker build -t "pruebas9:dockerfile" .
 
 docker images
 
+docker run -ti --name pruebacontainer -p 8080:8080 2c089728ea86
+docker run -ti --name pruebacontainer 2c089728ea86
+
 *Optional:*
 docker run -dti --name pruebacontainer -p 8080:8080 <<imageID>>
-docker run -dti --name pruebacontainer -p 8080:8080 af5e7f2c2088
-docker run -dti --name pruebacontainer af5e7f2c2088
 
 docker ps
 
