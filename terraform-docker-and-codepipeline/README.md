@@ -19,10 +19,7 @@
  - cambia los valores por los tuyos y copia y pega en tu bash de linux 
 3. ejecuta el comando make init o terraform init
 4. ejecuta el comando make plan o terraform plan
-5. ejecuta el comando make apply    o terraform apply
-     - Nota: si deseas usar el comando make init o make plan debes ver el apartado usar docker con terraform
-[mi canal](https://www.youtube.com/channel/UCfJ67eVA7DkKbbIF5ceJDMA)
-
+5. ejecuta el comando make apply o terraform apply
 6. luego tienes que instalar git remote codecommit 
 7. has clone del repo y luego entra a la carpeta
 8. agrega todos tus archivos de terraform a este nuevo repositorio y has push y listo
