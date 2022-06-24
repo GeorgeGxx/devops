@@ -5,3 +5,7 @@
 #jobs
 #jobs_bd_access
 #otros
+
+.DS_Store
+.classpath
+.project
